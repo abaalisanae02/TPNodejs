@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affichage d'images</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.1/socket.io.js"></script>
+</head>
+<body>
+    <h1>Affichage d'images</h1>
+    <div id="imagesContainer"></div>
+
+    <script>
+        const socket = io();
+        socket.emit('find');
+
+        // Recevoir toutes les images du serveur
+        socket.on('allImages', images => {
+            const imagesContainer = document.getElementById('imagesContainer');
+            images.forEach(imageData => {
+                const img = document.createElement('img');
+                img.src ='data:image/jpeg;base64,'+ imageData;
+                imagesContainer.appendChild(img);
+            });
+        });
+    </script>
+</body>
+</html>

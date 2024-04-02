@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affichage d'image</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.1/socket.io.js"></script>
+</head>
+<body>
+    <h1>Affichage d'image</h1>
+    <img id="image" src="" alt="Image">
+    <script>
+        const socket = io();
+        socket.emit('showImage');
+        socket.on('image', function(imageData) {
+            document.getElementById('image').src = 'data:image/jpeg;base64,'+ imageData;
+        });
+    </script>
+</body>
+</html>
